@@ -5,6 +5,7 @@ class Play extends Phaser.Scene {
 
     preload() {
         this.load.image('beach', './assets/tile.png');
+        this.load.image('platform', './assets/StonePlatform.png');
         //this.load.spritesheet('explosion', './assets/sharkexplosion.png', {frameWidth: 64, frameHeight: 32, 
             //startFrame: 0, endFrame: 6});
     }
@@ -23,4 +24,9 @@ class Play extends Phaser.Scene {
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height,
             0x9fa8da).setOrigin(0, 0);
     }  
+
+    createPlatform(){
+        this.platforms = this.physics.add.staticGroup();
+        this.platforms.create(600,400, 'platform');
+    }
 }
