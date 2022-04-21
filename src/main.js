@@ -1,9 +1,16 @@
-let config = {
+var config = {
     type: Phaser.AUTO,
-    width: 640,
-    height: 480,
-    scene: [Menu, Play] 
-}
+    width: 800,
+    height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
+    scene: [Menu,Play]
+};
 
 
 let game = new Phaser.Game(config);
