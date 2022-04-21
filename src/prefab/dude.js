@@ -7,11 +7,15 @@ class dude extends Phaser.Physics.Arcade.Sprite{
         this.left;
         this.right;
         this.jump;
+        this.setScale(2);
     
         this.setCollideWorldBounds(true);
+        this.setBounce(0.2);
+        this.setVelocityX(0,0)
     }
 
   update(){
+    this.setVelocityX(0);
     if(this.left.isDown){
         this.setVelocityX(-160);
 
@@ -23,7 +27,7 @@ class dude extends Phaser.Physics.Arcade.Sprite{
         //add animation line here for when facing left
     }
 
-    if(Phaser.Input.Keyboard.JustDown(jump) && this.body.touching.down ){ // add checking to see if its on the floor befoe jumping or else it will keep jumping
+    if(Phaser.Input.Keyboard.JustDown(this.jump) && this.body.touching.down ){ // add checking to see if its on the floor befoe jumping or else it will keep jumping
         this.setVelocityY(-330);
 
         //add animation for jumping here
