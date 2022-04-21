@@ -32,7 +32,8 @@ class Play extends Phaser.Scene {
 
     createPlatform(){
         this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(600,400, 'platform');
+        this.platforms.create(600,400, 'platform').setScale(2).refreshBody(); 
         //this.platforms.add('platform');
+        //this.platforms.setscale(2);
     }
 }
