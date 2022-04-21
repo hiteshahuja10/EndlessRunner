@@ -34,6 +34,7 @@ class Play extends Phaser.Scene {
         this.createPlatform();
         this.physics.add.collider(this.player, this.platforms); 
         this.physics.add.collider(this.player, this.spikes);
+        //dummy
     }
     
     update(){
