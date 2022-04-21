@@ -22,7 +22,7 @@ class Menu extends Phaser.Scene {
             },
             fixedWidth: 0
         }
-        this.brick = this.add.tileSprite(0, 0, 800, 600, 'brick').setOrigin(0, 0);
+        this.brick = this.add.tileSprite(0, 0, 560, 700, 'brick').setOrigin(0, 0);
         //show menu text
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 
             'P1: Use A&D to move & Space Bar to jump', menuConfig).setOrigin(0.5);
@@ -41,6 +41,9 @@ class Menu extends Phaser.Scene {
     }
 
     update(){
+        this.game.scale.pageAlignHorizontally = true;
+        this.game.scale.pageAlignVertically = true;
+        this.game.scale.refresh();
         this.brick.tilePositionY -= 4;
         if (Phaser.Input.Keyboard.JustDown(spaceBar)) {
             /*game.settings = {
