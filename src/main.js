@@ -1,7 +1,7 @@
 var config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 560,
+    height: 700,
     physics: {
         default: 'arcade',
         arcade: {
@@ -13,7 +13,7 @@ var config = {
 };
 
 
-let game = new Phaser.Game(config);
+var game = new Phaser.Game(config);
 // reserve keyboard vars
 let keyF, keyR, keyLEFT, keyRIGHT, spaceBar;
 // set UI sizes
