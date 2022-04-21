@@ -12,7 +12,7 @@ class Play extends Phaser.Scene {
 
     create() {
         // place tile sprite
-        this.tile = this.add.tileSprite(0, 0, 800, 600, 'tile').setOrigin(0, 0);
+        this.tile = this.add.tileSprite(0, 0, 560, 700, 'tile').setOrigin(0, 0);
         // blue UI background
         this.add.rectangle(0, borderUISize, game.config.width, (borderUISize * 2)-5, 
             0xc2e0ff).setOrigin(0, 0);
