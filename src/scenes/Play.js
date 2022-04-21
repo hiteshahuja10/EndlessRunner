@@ -6,6 +6,7 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image('tile', './assets/tile.png');
         this.load.image('platform', './assets/StonePlatform.png');
+        this.load.image('player', './assets/sharknew.png');
         //this.load.spritesheet('explosion', './assets/sharkexplosion.png', {frameWidth: 64, frameHeight: 32, 
             //startFrame: 0, endFrame: 6});
     }
@@ -23,6 +24,10 @@ class Play extends Phaser.Scene {
         this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height,
             0xFFFFFF).setOrigin(0, 0);
+        this.player = new dude(this,game.config.height - borderUISize, game.config.width, 'player');
+        this.player.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.player.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.player.jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
     
     update(){
