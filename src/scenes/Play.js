@@ -38,13 +38,7 @@ class Play extends Phaser.Scene {
     
     update(){
         this.tile.tilePositionY -= 4;
-<<<<<<< HEAD
-        this.game.scale.pageAlignHorizontally = true;
-        this.game.scale.pageAlignVertically = true;
-        this.game.scale.refresh();
-=======
         this.player.update();    
->>>>>>> 7625742341a20bf4d01634d685af18bffd2d425b
     }
 
     createPlatform(){
