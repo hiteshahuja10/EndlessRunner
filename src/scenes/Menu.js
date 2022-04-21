@@ -25,13 +25,13 @@ class Menu extends Phaser.Scene {
         this.brick = this.add.tileSprite(0, 0, 640, 480, 'brick').setOrigin(0, 0);
         //show menu text
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 
-            'P1: Use A&D to move & space bar to jump', menuConfig).setOrigin(0.5);
+            'P1: Use A&D to move & Space Bar to jump', menuConfig).setOrigin(0.5);
         
         //menuConfig.backgroundColor = '#00FF00';
         menuConfig.backgroundColor = '#c2e0ff';
         menuConfig.color = '#000';
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding,
-            'Press space bar to start the game!', menuConfig).setOrigin(0.5);
+            'Press Space Bar to start the game!', menuConfig).setOrigin(0.5);
 
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
