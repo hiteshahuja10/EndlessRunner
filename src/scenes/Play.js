@@ -30,18 +30,33 @@ class Play extends Phaser.Scene {
         this.player.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.player.jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.createPlatform();
+<<<<<<< HEAD
         this.physics.add.collider(player, platforms);
         
+=======
+        this.physics.add.collider(this.player, this.platforms); 
+>>>>>>> 4bdf4f4fce6a6b3ace32ee4b77386dd946a45ef3
     }
     
     update(){
         this.tile.tilePositionY -= 4;
+<<<<<<< HEAD
+=======
+        
+        
+>>>>>>> 4bdf4f4fce6a6b3ace32ee4b77386dd946a45ef3
     }
 
     createPlatform(){
         this.platforms = this.physics.add.staticGroup();
         this.platforms.create(600,400, 'platform').setScale(2).refreshBody();
-        //this.platforms.add('platform');
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 4bdf4f4fce6a6b3ace32ee4b77386dd946a45ef3
+
+
+//this.platforms.add('platform');
         //this.platforms.setscale(2);
     }
 }
