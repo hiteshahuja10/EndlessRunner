@@ -11,6 +11,7 @@ class Play extends Phaser.Scene {
         this.load.image('platform', './assets/StonePlatform.png');
         this.load.image('player', './assets/alien.png');
         this.load.image('spike','./assets/Spikes.png')
+        this.load.image('lava', './assets/Lava.png');
         //this.load.spritesheet('explosion', './assets/sharkexplosion.png', {frameWidth: 64, frameHeight: 32, 
             //startFrame: 0, endFrame: 6});
     }
@@ -21,6 +22,7 @@ class Play extends Phaser.Scene {
         // blue UI background
         this.add.rectangle(0, borderUISize, game.config.width, (borderUISize * 2)-5, 
             0xc2e0ff).setOrigin(0, 0);
+
         // purple borders
         this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 
@@ -32,9 +34,13 @@ class Play extends Phaser.Scene {
         this.player.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.player.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.player.jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
         this.createPlatform();
         this.physics.add.collider(this.player, this.platforms); 
-        this.physics.add.collider(this.player, this.spikes); 
+        this.physics.add.collider(this.player, this.spikes);
+
+        this.lava = this.physics.add.staticGroup();
+        this.platforms.create(280,650, 'lava');
     }
     
     update(){
