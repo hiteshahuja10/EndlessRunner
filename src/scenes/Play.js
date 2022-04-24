@@ -33,20 +33,19 @@ class Play extends Phaser.Scene {
         this.player.jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.createPlatform();
         this.physics.add.collider(this.player, this.platforms); 
-        this.physics.add.collider(this.player, this.spikes);
-        //dummy
+        this.physics.add.collider(this.player, this.spikes); 
     }
     
     update(){
         this.tile.tilePositionY -= 4;
-        
-        
+        this.player.update();    
     }
 
     createPlatform(){
         this.platforms = this.physics.add.staticGroup();
         this.spikes = this.physics.add.staticGroup()
         this.platforms.create(600,400, 'platform').setScale(2).refreshBody();
-        this.spikes.create(400,400,'spike').setScale(2).refreshBody();
+        this.spikes.create(300,400,'spike').setScale(2).refreshBody();
+        
     }
 }
