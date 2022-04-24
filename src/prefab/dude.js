@@ -13,6 +13,7 @@ class dude extends Phaser.Physics.Arcade.Sprite{
         this.setBounce(0);
         this.setVelocityX(0)
         this.alive = true;
+        this.gameOver = false;
 
         this.sfxDude = scene.sound.add('sfx_jump');
     }

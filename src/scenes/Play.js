@@ -43,7 +43,7 @@ class Play extends Phaser.Scene {
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
         this.lava = this.physics.add.staticGroup();
-        this.platforms.create(280,650, 'lava');
+        this.spikes.create(280,650, 'lava');
     }
     
     update(){
@@ -59,8 +59,7 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 0
         } 
-        //this.gameOver = true;
-        if (this.gameOver){
+        if (this.player.gameOver == true){
             console.log("game over screen")
             this.check = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu',
                 menuConfig).setOrigin(0.5);
@@ -94,8 +93,11 @@ class Play extends Phaser.Scene {
 
     PlayerHitSpikes( player, spikes){
         console.log("touching spikes");
-        this.gameOver = true;
+        player.gameOver = true;
         player.death();
+        player.left = 0;
+        player.right=0;
+        player.jump = 0;
 
     }
 }
