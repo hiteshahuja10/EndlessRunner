@@ -3,6 +3,7 @@ class Play extends Phaser.Scene {
         super("playScene");
         this.platforms;
         this.spikes;
+        this.gameOver = false;
     }
 
     preload() {
@@ -33,10 +34,32 @@ class Play extends Phaser.Scene {
         this.player.jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.createPlatform();
         this.physics.add.collider(this.player, this.platforms); 
-        this.physics.add.collider(this.player, this.spikes); 
+        this.physics.add.collider(this.player, this.spikes);
+        keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     }
     
     update(){
+        let menuConfig = {
+            fontFamily: 'Courier',
+            fontSize: '24px',
+            backgroundColor: '#f1a0ff',
+            color: '#1823ff',
+            align: 'right',
+            padding: {
+            top: 5,
+            bottom: 5,
+            },
+            fixedWidth: 0
+        } 
+        //this.gameOver = true;
+        if (this.gameOver){
+            this.check = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu',
+                menuConfig).setOrigin(0.5);
+            if (Phaser.Input.Keyboard.JustDown(keyR)){
+                console.log("jell0");
+                this.scene.restart();
+            }
+        }
         this.tile.tilePositionY -= 4;
         this.player.update();    
     }
@@ -48,4 +71,5 @@ class Play extends Phaser.Scene {
         this.spikes.create(300,400,'spike').setScale(2).refreshBody();
         
     }
+
 }
