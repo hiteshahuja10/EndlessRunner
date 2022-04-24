@@ -10,14 +10,18 @@ class dude extends Phaser.Physics.Arcade.Sprite{
         this.setScale(1);
     
         this.setCollideWorldBounds(true);
-        this.setBounce(0.2);
-        this.setVelocityX(0,0)
+        this.setBounce(0);
+        this.setVelocityX(0)
+        this.alive = true;
 
         this.sfxDude = scene.sound.add('sfx_jump');
     }
 
   update(){
-    this.setVelocityX(0);
+    if(this.alive == true){
+        this.setVelocityX(0);
+    }
+    //this.setVelocityX(0);
     if(this.left.isDown){
         this.setVelocityX(-160);
 
@@ -36,6 +40,13 @@ class dude extends Phaser.Physics.Arcade.Sprite{
         //add animation for jumping here
     }
 
+
+  }
+
+  death(){
+      this.alive = false;
+      this.body = null;
+      this.destroy();
   }
 
 }
