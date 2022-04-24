@@ -38,6 +38,7 @@ class Play extends Phaser.Scene {
 
         this.createPlatform();
         this.physics.add.collider(this.player, this.platforms); 
+        //this.physics.add.collider(this.player, this.spikes);
         this.physics.add.collider(this.player, this.spikes);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
@@ -68,6 +69,7 @@ class Play extends Phaser.Scene {
             }
         }
         this.tile.tilePositionY -= 4;
+        this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
         this.player.update();    
     }
     
@@ -88,4 +90,8 @@ class Play extends Phaser.Scene {
         
     }
 
+    PlayerHitSpikes( player, spikes){
+        player.death();
+
+    }
 }
