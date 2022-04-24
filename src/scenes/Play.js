@@ -3,6 +3,7 @@ class Play extends Phaser.Scene {
         super("playScene");
         this.platforms;
         this.spikes;
+        
     }
 
     preload() {
@@ -27,7 +28,7 @@ class Play extends Phaser.Scene {
         this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height,
             0xFFFFFF).setOrigin(0, 0);
-        this.player = new dude(this,610, 200, 'player');
+        this.player = new dude(this,300, 600, 'player');
         this.player.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.player.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.player.jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -40,12 +41,18 @@ class Play extends Phaser.Scene {
         this.tile.tilePositionY -= 4;
         this.player.update();    
     }
+    
 
     createPlatform(){
         this.platforms = this.physics.add.staticGroup();
         this.spikes = this.physics.add.staticGroup()
-        this.platforms.create(600,400, 'platform').setScale(2).refreshBody();
+        this.platforms.create(300,700, 'platform').setScale(2).refreshBody();
+        this.platforms.create(500,600, 'platform').setScale(2).refreshBody();
+        this.platforms.create(100,600, 'platform').setScale(2).refreshBody();
+        this.platforms.create(100,450, 'platform').refreshBody();
+        this.platforms.create(300,350, 'platform').refreshBody();
         this.spikes.create(300,400,'spike').setScale(2).refreshBody();
+        
         
     }
 }
