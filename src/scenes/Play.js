@@ -8,7 +8,7 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image('tile', './assets/tile.png');
         this.load.image('platform', './assets/StonePlatform.png');
-        this.load.image('player', './assets/sharknew.png');
+        this.load.image('player', './assets/alien.png');
         this.load.image('spike','./assets/Spikes.png')
         //this.load.spritesheet('explosion', './assets/sharkexplosion.png', {frameWidth: 64, frameHeight: 32, 
             //startFrame: 0, endFrame: 6});
