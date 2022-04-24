@@ -10,7 +10,8 @@ class Play extends Phaser.Scene {
         this.load.image('tile', './assets/tile.png');
         this.load.image('platform', './assets/StonePlatform.png');
         this.load.image('player', './assets/alien.png');
-        this.load.image('spike','./assets/Spikes.png')
+        this.load.image('spike','./assets/Spikes.png');
+        this.load.image('spike1','./assets/Spikes1.png');
         this.load.image('lava', './assets/Lava.png');
         //this.load.spritesheet('explosion', './assets/sharkexplosion.png', {frameWidth: 64, frameHeight: 32, 
             //startFrame: 0, endFrame: 6});
@@ -55,9 +56,12 @@ class Play extends Phaser.Scene {
         this.platforms.create(300,600, 'platform').setScale(2).refreshBody();
         this.platforms.create(500,600, 'platform').setScale(2).refreshBody();
         this.platforms.create(100,600, 'platform').setScale(2).refreshBody();
+        this.platforms.create(500,450,'platform').refreshBody();
         this.platforms.create(100,450, 'platform').refreshBody();
         this.platforms.create(300,350, 'platform').refreshBody();
-        this.spikes.create(300,400,'spike').setScale(2).refreshBody();
+        this.platforms.create(150,250, 'platform').refreshBody();
+        this.spikes.create(300,400,'spike').setScale(3).refreshBody();
+        this.spikes.create(70,200,'spike1').setScale(2).refreshBody();
         
         
     }
