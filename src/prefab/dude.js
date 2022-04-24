@@ -7,7 +7,7 @@ class dude extends Phaser.Physics.Arcade.Sprite{
         this.left;
         this.right;
         this.jump;
-        this.setScale(2);
+        this.setScale(1);
     
         this.setCollideWorldBounds(true);
         this.setBounce(0.2);
