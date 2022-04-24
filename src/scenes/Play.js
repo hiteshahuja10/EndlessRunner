@@ -39,7 +39,7 @@ class Play extends Phaser.Scene {
         this.createPlatform();
         this.physics.add.collider(this.player, this.platforms); 
         //this.physics.add.collider(this.player, this.spikes);
-        this.physics.add.collider(this.player, this.spikes);
+        //this.physics.add.collider(this.player, this.spikes);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
         this.lava = this.physics.add.staticGroup();
@@ -61,6 +61,7 @@ class Play extends Phaser.Scene {
         } 
         //this.gameOver = true;
         if (this.gameOver){
+            console.log("game over screen")
             this.check = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu',
                 menuConfig).setOrigin(0.5);
             if (Phaser.Input.Keyboard.JustDown(keyR)){
@@ -70,6 +71,7 @@ class Play extends Phaser.Scene {
         }
         this.tile.tilePositionY -= 4;
         this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
+        this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
         this.player.update();    
     }
     
@@ -91,6 +93,8 @@ class Play extends Phaser.Scene {
     }
 
     PlayerHitSpikes( player, spikes){
+        console.log("touching spikes");
+        this.gameOver = true;
         player.death();
 
     }
