@@ -111,8 +111,7 @@ class Play extends Phaser.Scene {
         this.tile.tilePositionY -= 4;
         this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
         this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
-        this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
-        //this.player.update();    
+        this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this); 
         if(this.player.gameOver != true){
           this.player.update();    
         }
