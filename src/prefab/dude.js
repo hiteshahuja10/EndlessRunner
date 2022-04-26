@@ -7,6 +7,7 @@ class dude extends Phaser.Physics.Arcade.Sprite{
         this.left;
         this.right;
         this.jump;
+        this.leftrun;
         this.setScale(1);
     
         this.setCollideWorldBounds(true);
@@ -23,13 +24,18 @@ class dude extends Phaser.Physics.Arcade.Sprite{
         this.setVelocityX(0);
     }
     //this.setVelocityX(0);
+    if(!this.left.isDown && !this.right.isDown){
+        this.anims.play('vibing')
+    }
     if(this.left.isDown){
         this.setVelocityX(-160);
+        this.anims.play('leftrun',true);
 
         //add animation line here for when facing left
     }
     if(this.right.isDown){
         this.setVelocityX(160);
+        this.anims.play('rightrun',true);
 
         //add animation line here for when facing left
     }

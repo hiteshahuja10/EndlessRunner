@@ -9,10 +9,13 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image('tile', './assets/Tile.png');
         this.load.image('platform', './assets/StonePlatform.png');
-        this.load.image('player', './assets/alien.png');
+        this.load.image('player', './assets/player.png');
         this.load.image('spike','./assets/Spikes.png');
         this.load.image('spike1','./assets/Spikes1.png');
         this.load.image('lava', './assets/Lava.png');
+        this.load.spritesheet('leftrun', './assets/Player_LeftRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
+        this.load.spritesheet('rightrun', './assets/Play_RightRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
+        this.load.spritesheet('vibing', './assets/player.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:0} )
         //this.load.spritesheet('explosion', './assets/sharkexplosion.png', {frameWidth: 64, frameHeight: 32, 
             //startFrame: 0, endFrame: 6});
     }
@@ -44,6 +47,22 @@ class Play extends Phaser.Scene {
 
         this.lava = this.physics.add.staticGroup();
         this.spikes.create(280,650, 'lava');
+        this.anims.create({
+            key: 'leftrun',
+            frames: this.anims.generateFrameNumbers('leftrun', { start: 0, end: 4, first: 0}),
+            frameRate: 30
+        });
+        this.anims.create({
+            key: 'rightrun',
+            frames: this.anims.generateFrameNumbers('rightrun', { start: 0, end: 4, first: 0}),
+            frameRate: 30
+        });
+        this.anims.create({
+            key: 'vibing',
+            frames: this.anims.generateFrameNumbers('vibing', { start: 0, end: 0, first: 0}),
+            frameRate: 30
+        });
+
     }
     
     update(){
@@ -71,7 +90,9 @@ class Play extends Phaser.Scene {
         this.tile.tilePositionY -= 4;
         this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
         this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
-        this.player.update();    
+        if(this.player.gameOver != true){
+          this.player.update();    
+        }
     }
     
 
