@@ -70,12 +70,12 @@ class Play extends Phaser.Scene {
         this.coin.create(400,300,'shark');
         this.anims.create({
             key: 'leftrun',
-            frames: this.anims.generateFrameNumbers('leftrun', { start: 0, end: 4, first: 0}),
+            frames: this.anims.generateFrameNumbers('leftrun', { start: 0, end: 3, first: 0}),
             frameRate: 30
         });
         this.anims.create({
             key: 'rightrun',
-            frames: this.anims.generateFrameNumbers('rightrun', { start: 0, end: 4, first: 0}),
+            frames: this.anims.generateFrameNumbers('rightrun', { start: 0, end: 3, first: 0}),
             frameRate: 30
         });
         this.anims.create({
@@ -134,7 +134,7 @@ class Play extends Phaser.Scene {
         this.spikes.create(70,200,'spike1').setScale(2).refreshBody();
     }
 
-    PlayerCollectCoin(player,coin){
+    PlayerCollectCoin(player,coin){s
         coin.disableBody(true,true);
         this.p1Score += 1;
         this.scoreLeft.text = this.p1Score;
