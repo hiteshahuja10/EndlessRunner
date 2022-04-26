@@ -15,7 +15,7 @@ class Play extends Phaser.Scene {
         this.load.image('lava', './assets/Lava.png');
         this.load.spritesheet('leftrun', './assets/Player_LeftRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
         this.load.spritesheet('rightrun', './assets/Play_RightRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
-        this.load.spritesheet('vibing', './assets/player.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:0} )
+        this.load.spritesheet('vibing', './assets/Player.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:0} )
         //this.load.spritesheet('explosion', './assets/sharkexplosion.png', {frameWidth: 64, frameHeight: 32, 
             //startFrame: 0, endFrame: 6});
     }
