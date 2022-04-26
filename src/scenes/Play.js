@@ -17,7 +17,7 @@ class Play extends Phaser.Scene {
         this.load.image('shark', './assets/sharknew.png');
         this.load.spritesheet('leftrun', './assets/Player_LeftRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
         this.load.spritesheet('rightrun', './assets/Play_RightRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
-        this.load.spritesheet('vibing', './assets/player.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:0} )
+        this.load.spritesheet('vibing', './assets/Player.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:0} )
         //this.load.spritesheet('explosion', './assets/sharkexplosion.png', {frameWidth: 64, frameHeight: 32, 
             //startFrame: 0, endFrame: 6});
     }
@@ -111,8 +111,7 @@ class Play extends Phaser.Scene {
         this.tile.tilePositionY -= 4;
         this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
         this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
-        this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
-        this.player.update();    
+        this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this); 
         if(this.player.gameOver != true){
           this.player.update();    
         }
