@@ -133,7 +133,7 @@ class Play extends Phaser.Scene {
         this.spikes.create(70,200,'spike1').setScale(2).refreshBody();
     }
 
-    PlayerCollectCoin(player,coin){s
+    PlayerCollectCoin(player,coin){
         coin.disableBody(true,true);
         this.p1Score += 1;
         this.scoreLeft.text = this.p1Score;
