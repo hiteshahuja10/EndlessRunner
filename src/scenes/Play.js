@@ -14,7 +14,7 @@ class Play extends Phaser.Scene {
         this.load.image('spike','./assets/Spikes.png');
         this.load.image('spike1','./assets/Spikes1.png');
         this.load.image('lava', './assets/Lava.png');
-        this.load.image('shark', './assets/sharknew.png');
+        this.load.image('shark', './assets/coin_placeholder.png');
         this.load.spritesheet('leftrun', './assets/Player_LeftRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
         this.load.spritesheet('rightrun', './assets/Play_RightRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
         this.load.spritesheet('vibing', './assets/Player.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:0} )
@@ -70,12 +70,12 @@ class Play extends Phaser.Scene {
         this.coin.create(400,300,'shark');
         this.anims.create({
             key: 'leftrun',
-            frames: this.anims.generateFrameNumbers('leftrun', { start: 0, end: 4, first: 0}),
+            frames: this.anims.generateFrameNumbers('leftrun', { start: 0, end: 3, first: 0}),
             frameRate: 30
         });
         this.anims.create({
             key: 'rightrun',
-            frames: this.anims.generateFrameNumbers('rightrun', { start: 0, end: 4, first: 0}),
+            frames: this.anims.generateFrameNumbers('rightrun', { start: 0, end: 3, first: 0}),
             frameRate: 30
         });
         this.anims.create({
