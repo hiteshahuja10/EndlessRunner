@@ -14,7 +14,7 @@ class Play extends Phaser.Scene {
         this.load.image('spike','./assets/Spikes.png');
         this.load.image('spike1','./assets/Spikes1.png');
         this.load.image('lava', './assets/Lava.png');
-        this.load.image('shark', './assets/sharknew.png');
+        this.load.image('shark', './assets/coin.png');
         this.load.spritesheet('leftrun', './assets/Player_LeftRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
         this.load.spritesheet('rightrun', './assets/Play_RightRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
         this.load.spritesheet('vibing', './assets/Player.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:0} )
@@ -133,7 +133,7 @@ class Play extends Phaser.Scene {
         this.platforms.create(500,450,'platform').refreshBody();
         this.platforms.create(100,450, 'platform').refreshBody();
         this.platforms.create(300,350, 'platform').refreshBody();
-        this.platforms.create(150,250, 'platform').refreshBody();
+        this.platforms.create(150,450, 'platform').refreshBody();
         this.spikes.create(300,400,'spike').setScale(2).refreshBody();
         this.spikes.create(70,200,'spike1').setScale(2).refreshBody();
         

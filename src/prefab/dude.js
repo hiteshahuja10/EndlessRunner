@@ -28,13 +28,13 @@ class dude extends Phaser.Physics.Arcade.Sprite{
         this.anims.play('vibing')
     }
     if(this.left.isDown){
-        this.setVelocityX(-160);
+        this.setVelocityX(-200);
         this.anims.play('leftrun',true);
 
         //add animation line here for when facing left
     }
     if(this.right.isDown){
-        this.setVelocityX(160);
+        this.setVelocityX(200);
         this.anims.play('rightrun',true);
 
         //add animation line here for when facing left
