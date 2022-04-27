@@ -128,7 +128,7 @@ class Play extends Phaser.Scene {
         this.platforms.create(500,450,'platform').refreshBody();
         this.platforms.create(100,450, 'platform').refreshBody();
         this.platforms.create(300,350, 'platform').refreshBody();
-        this.platforms.create(150,250, 'platform').refreshBody();
+        this.platforms.create(150,450, 'platform').refreshBody();
         this.spikes.create(300,400,'spike').setScale(2).refreshBody();
         this.spikes.create(70,200,'spike1').setScale(2).refreshBody();
     }
