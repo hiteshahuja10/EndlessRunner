@@ -38,6 +38,7 @@ class Play extends Phaser.Scene {
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height,
             0xFFFFFF).setOrigin(0, 0);
         this.player = new dude(this,300, 500, 'player');
+        this.player.body.gravity.y = 200;
         //this.coin = this.add.sprite(0, 0, 100, 400, 'shark');
         //this.shark = new dude(this,100,300, 'shark');
         let scoreConfig = {
@@ -119,18 +120,23 @@ class Play extends Phaser.Scene {
     
 
     createPlatform(){
-        this.platforms = this.physics.add.staticGroup();
+        this.platforms = this.physics.add.group();
+        this.platforms.enableBody = false;
+        
+        this.platforms.velocity = 5;
         this.spikes = this.physics.add.staticGroup();
         this.coin = this.physics.add.staticGroup();
         this.platforms.create(300,600, 'platform').setScale(2).refreshBody();
         this.platforms.create(500,600, 'platform').setScale(2).refreshBody();
         this.platforms.create(100,600, 'platform').setScale(2).refreshBody();
+        
         this.platforms.create(500,450,'platform').refreshBody();
         this.platforms.create(100,450, 'platform').refreshBody();
         this.platforms.create(300,350, 'platform').refreshBody();
         this.platforms.create(150,250, 'platform').refreshBody();
         this.spikes.create(300,400,'spike').setScale(2).refreshBody();
         this.spikes.create(70,200,'spike1').setScale(2).refreshBody();
+        
     }
 
     PlayerCollectCoin(player,coin){
