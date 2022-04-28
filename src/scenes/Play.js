@@ -141,7 +141,7 @@ class Play extends Phaser.Scene {
 
     createPlatform(x,y){
         this.platforms = this.add.group();
-        let tile = this.physics.add.sprite(300,600,'platform').setScale(2).refreshBody();
+        let tile = this.physics.add.sprite(x,y,'platform').setScale(2).refreshBody();
         tile.body.immovable = true;
         tile.body.allowGravity = false;
         tile.body.setVelocityY(5);
