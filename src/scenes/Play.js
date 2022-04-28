@@ -60,6 +60,7 @@ class Play extends Phaser.Scene {
         this.player.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.player.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.player.jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.Left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
 
         this.createPlatform();
         this.physics.add.collider(this.player, this.platforms); 
@@ -84,6 +85,9 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('vibing', { start: 0, end: 0, first: 0}),
             frameRate: 30
         });
+        this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
+        this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
+        this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
 
     }
     
@@ -105,14 +109,13 @@ class Play extends Phaser.Scene {
             this.check = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu',
                 menuConfig).setOrigin(0.5);
             if (Phaser.Input.Keyboard.JustDown(keyR)){
-                console.log("jell0");
                 this.scene.restart();
+            }
+            if (Phaser.Input.Keyboard.JustDown(this.Left)){
+                this.scene.start('menuScene');
             }
         }
         this.tile.tilePositionY -= 4;
-        this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
-        this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
-        this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this); 
         if(this.player.gameOver != true){
           this.player.update();    
         }
