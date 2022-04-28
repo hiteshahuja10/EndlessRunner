@@ -23,8 +23,13 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        this.music = this.sound.add('sfx_music');
+        this.music.loop = true;
+        this.music.play();
+
         // place tile sprite
         this.tile = this.add.tileSprite(0, 0, 560, 700, 'tile').setOrigin(0, 0);
+        this.sfxCoin = this.sound.add('sfx_coinpick');
         // blue UI background
         this.add.rectangle(0, borderUISize, game.config.width, (scoreUISize * 2)-5, 
             0xc2e0ff).setOrigin(0, 0);
@@ -60,6 +65,7 @@ class Play extends Phaser.Scene {
         this.player.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.player.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.player.jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.Left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
 
         this.createPlatform(300, 600);
 
@@ -86,10 +92,23 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('vibing', { start: 0, end: 0, first: 0}),
             frameRate: 30
         });
+        this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
+        this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
+        this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
+
+        this.block = this.physics.add.image(100,100,'platform');
+        this.block.setImmovable = true
+        this.block.setVelocityY(50);
+        this.block.body.setAllowGravity(false);
+        //this.block.body.moves = (true);
+        this.physics.add.collider(this.player, this.block);
+        this.block.setBounce(-1);
+        this.block.refreshBody();
 
     }
     
     update(){
+
         let menuConfig = {
             fontFamily: 'Courier',
             fontSize: '24px',
@@ -107,14 +126,13 @@ class Play extends Phaser.Scene {
             this.check = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu',
                 menuConfig).setOrigin(0.5);
             if (Phaser.Input.Keyboard.JustDown(keyR)){
-                console.log("jell0");
                 this.scene.restart();
+            }
+            if (Phaser.Input.Keyboard.JustDown(this.Left)){
+                this.scene.start('menuScene');
             }
         }
         this.tile.tilePositionY -= 4;
-        this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
-        this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
-        this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this); 
         if(this.player.gameOver != true){
           this.player.update();    
         }
@@ -132,6 +150,7 @@ class Play extends Phaser.Scene {
 
     PlayerCollectCoin(player,coin){
         coin.disableBody(true,true);
+        this.sfxCoin.play();
         this.p1Score += 1;
         this.scoreLeft.text = this.p1Score;
     }
@@ -141,7 +160,7 @@ class Play extends Phaser.Scene {
         player.gameOver = true;
         player.death();
         player.left = 0;
-        player.right=0;
+        player.right= 0;
         player.jump = 0;
 
     }
