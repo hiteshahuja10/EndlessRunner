@@ -23,6 +23,10 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        this.music = this.sound.add('sfx_music');
+        this.music.loop = true;
+        this.music.play();
+
         // place tile sprite
         this.tile = this.add.tileSprite(0, 0, 560, 700, 'tile').setOrigin(0, 0);
         this.sfxCoin = this.sound.add('sfx_coinpick');
@@ -93,6 +97,7 @@ class Play extends Phaser.Scene {
     }
     
     update(){
+
         let menuConfig = {
             fontFamily: 'Courier',
             fontSize: '24px',
@@ -106,6 +111,7 @@ class Play extends Phaser.Scene {
             fixedWidth: 0
         } 
         if (this.player.gameOver == true){
+            this.music.stop();
             console.log("game over screen")
             this.check = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu',
                 menuConfig).setOrigin(0.5);
@@ -155,7 +161,7 @@ class Play extends Phaser.Scene {
         player.gameOver = true;
         player.death();
         player.left = 0;
-        player.right=0;
+        player.right= 0;
         player.jump = 0;
 
     }
