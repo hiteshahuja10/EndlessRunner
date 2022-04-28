@@ -111,6 +111,7 @@ class Play extends Phaser.Scene {
             fixedWidth: 0
         } 
         if (this.player.gameOver == true){
+            this.music.loop = false;
             this.music.stop();
             console.log("game over screen")
             this.check = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu',
