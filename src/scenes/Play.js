@@ -85,6 +85,15 @@ class Play extends Phaser.Scene {
             frameRate: 30
         });
 
+        this.block = this.physics.add.image(100,100,'platform');
+        this.block.setImmovable = true
+        this.block.setVelocityY(50);
+        this.block.body.setAllowGravity(false);
+        //this.block.body.moves = (true);
+        this.physics.add.collider(this.player, this.block);
+        this.block.setBounce(-1);
+        this.block.refreshBody();
+
     }
     
     update(){
@@ -120,10 +129,7 @@ class Play extends Phaser.Scene {
     
 
     createPlatform(){
-        this.platforms = this.physics.add.group();
-        this.platforms.enableBody = false;
-        
-        this.platforms.velocity = 5;
+        this.platforms = this.physics.add.staticGroup();
         this.spikes = this.physics.add.staticGroup();
         this.coin = this.physics.add.staticGroup();
         this.platforms.create(300,600, 'platform').setScale(2).refreshBody();
