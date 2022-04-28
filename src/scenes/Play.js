@@ -61,10 +61,12 @@ class Play extends Phaser.Scene {
         this.player.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.player.jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        this.createPlatform();
+        this.createPlatform(300, 600);
+
         this.physics.add.collider(this.player, this.platforms); 
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
-
+        this.spikes = this.physics.add.staticGroup();
+        this.coin = this.physics.add.staticGroup();
         this.lava = this.physics.add.staticGroup();
         this.spikes.create(280,650, 'lava');
         this.coin.create(100,300,'shark');
@@ -101,7 +103,7 @@ class Play extends Phaser.Scene {
             fixedWidth: 0
         } 
         if (this.player.gameOver == true){
-            console.log("game over screen")
+            //console.log("game over screen")
             this.check = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu',
                 menuConfig).setOrigin(0.5);
             if (Phaser.Input.Keyboard.JustDown(keyR)){
@@ -119,24 +121,13 @@ class Play extends Phaser.Scene {
     }
     
 
-    createPlatform(){
-        this.platforms = this.physics.add.group();
-        this.platforms.enableBody = false;
-        
-        this.platforms.velocity = 5;
-        this.spikes = this.physics.add.staticGroup();
-        this.coin = this.physics.add.staticGroup();
-        this.platforms.create(300,600, 'platform').setScale(2).refreshBody();
-        this.platforms.create(500,600, 'platform').setScale(2).refreshBody();
-        this.platforms.create(100,600, 'platform').setScale(2).refreshBody();
-        
-        this.platforms.create(500,450,'platform').refreshBody();
-        this.platforms.create(100,450, 'platform').refreshBody();
-        this.platforms.create(300,350, 'platform').refreshBody();
-        this.platforms.create(150,450, 'platform').refreshBody();
-        this.spikes.create(300,400,'spike').setScale(2).refreshBody();
-        this.spikes.create(70,200,'spike1').setScale(2).refreshBody();
-        
+    createPlatform(x,y){
+        this.platforms = this.add.group();
+        let tile = this.physics.add.sprite(300,600,'platform').setScale(2).refreshBody();
+        tile.body.immovable = true;
+        tile.body.allowGravity = false;
+        tile.body.setVelocityY(5);
+        this.platforms.add(tile);
     }
 
     PlayerCollectCoin(player,coin){
