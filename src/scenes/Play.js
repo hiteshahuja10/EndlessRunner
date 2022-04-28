@@ -25,6 +25,7 @@ class Play extends Phaser.Scene {
     create() {
         // place tile sprite
         this.tile = this.add.tileSprite(0, 0, 560, 700, 'tile').setOrigin(0, 0);
+        this.sfxCoin = this.sound.add('sfx_coinpick');
         // blue UI background
         this.add.rectangle(0, borderUISize, game.config.width, (scoreUISize * 2)-5, 
             0xc2e0ff).setOrigin(0, 0);
@@ -141,6 +142,7 @@ class Play extends Phaser.Scene {
 
     PlayerCollectCoin(player,coin){
         coin.disableBody(true,true);
+        this.sfxCoin.play();
         this.p1Score += 1;
         this.scoreLeft.text = this.p1Score;
     }

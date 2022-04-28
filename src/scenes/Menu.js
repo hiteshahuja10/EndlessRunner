@@ -8,6 +8,7 @@ class Menu extends Phaser.Scene {
         //this.load.audio('sfx_rocket', './assets/Laser_Shoot.wav');
         this.load.audio('sfx_jump', './assets/Jump8.wav');
         this.load.audio('sfx_death', './assets/Death.wav');
+        this.load.audio('sfx_coinpick', './assets/Pickup_Coin.wav');
         this.load.image('brick', './assets/StonePlatform.png');
     }
 

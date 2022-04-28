@@ -17,6 +17,8 @@ class dude extends Phaser.Physics.Arcade.Sprite{
         this.gameOver = false;
 
         this.sfxDude = scene.sound.add('sfx_jump');
+        this.sfxDeath = scene.sound.add('sfx_death');
+
     }
 
   update(){
@@ -53,6 +55,7 @@ class dude extends Phaser.Physics.Arcade.Sprite{
   death(){
       this.alive = false;
       this.body = null;
+      this.sfxDeath.play();
       this.destroy();
   }
 
