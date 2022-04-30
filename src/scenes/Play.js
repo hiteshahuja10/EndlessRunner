@@ -114,7 +114,7 @@ class Play extends Phaser.Scene {
             delay: 5000,
             callback: () =>{
                 this.createPlatform(this.randomNumberX(600), 150);
-                console.log("test");
+                //console.log("test");
             },
             loop: true
         })
@@ -191,8 +191,9 @@ class Play extends Phaser.Scene {
     }
 
     platformHitLava(platform, lava){
-        console.log("platform hit lava");
+        //console.log("platform hit lava");
         //this.createPlatform(100,300);
+        //checking
         platform.destroy();
     }
 
