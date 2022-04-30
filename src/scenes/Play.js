@@ -142,7 +142,7 @@ class Play extends Phaser.Scene {
         tile.body.setVelocityY(5);
         this.platforms.add(tile);
         if (x != 300 && y != 600){
-            let coin = this.physics.add.sprite(x,y-50,'coin').setScale(1);
+            let coin = this.physics.add.sprite(this.randomNumberX(x),y-50,'coin').setScale(1);
             coin.body.immovable = true;
             coin.body.allowGravity = false;
             coin.body.setVelocityY(5);
