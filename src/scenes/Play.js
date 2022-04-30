@@ -32,20 +32,10 @@ class Play extends Phaser.Scene {
         // place tile sprite
         this.tile = this.add.tileSprite(0, 0, 560, 700, 'tile').setOrigin(0, 0);
         this.sfxCoin = this.sound.add('sfx_coinpick');
-        // blue UI background
-        this.title = this.add.rectangle(0, borderUISize, game.config.width, (scoreUISize * 2)-5, 
-            0xc2e0ff).setOrigin(0, 0);
 
-        // purple borders
-        //game.config.width
-        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 
-            0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height,
-            0xFFFFFF).setOrigin(0, 0);
         this.player = new dude(this,300, 500, 'player');
         this.player.body.gravity.y = 200;
+        //this.title.setCollideWorldBounds(true);
         let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '50px',
@@ -58,9 +48,7 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
         }
-        this.p1Score = 0;
-        this.scoreLeft = this.add.text(borderUISize + borderPadding*54, borderUISize + borderPadding, 
-            this.p1Score, scoreConfig);
+
         //this.gameTime = this.add.text(game.config.width/2-20, borderUISize + borderPadding, this.game_time, timeConfig);
         this.player.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.player.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -73,7 +61,7 @@ class Play extends Phaser.Scene {
         //this.player.setCollideWorldBounds(true);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         this.spikes = this.physics.add.staticGroup();
-        this.coin = this.physics.add.staticGroup();
+        //this.coin = this.physics.add.staticGroup();
         this.lava = this.physics.add.staticGroup();
         this.lava.create(280,675, 'lava');
         //this.coin.create(100,300,'coin');
@@ -100,11 +88,11 @@ class Play extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
 
         this.createPlatform(300,600);
-        this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
-        this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
-        this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
-        this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
-        this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
+        this.createPlatform(this.randomNumberX(600), 150);
+        this.createPlatform(this.randomNumberX(600), 150);
+        //this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
+        //this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
+        //this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
 
         /*this.block = this.physics.add.image(100,100,'platform');
         this.block.setImmovable(true);
@@ -112,6 +100,21 @@ class Play extends Phaser.Scene {
         this.block.body.setAllowGravity(false);
         this.physics.add.collider(this.player, this.block);
         this.block.refreshBody();*/
+        // blue UI background
+        this.title = this.add.rectangle(0, borderUISize, game.config.width, (scoreUISize * 2)-5, 
+            0xc2e0ff).setOrigin(0, 0);
+
+        // purple borders
+        //game.config.width
+        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
+        this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 
+            0xFFFFFF).setOrigin(0, 0);
+        this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
+        this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height,
+            0xFFFFFF).setOrigin(0, 0);
+        this.p1Score = 0;
+        this.scoreLeft = this.add.text(borderUISize + borderPadding*54, borderUISize + borderPadding, 
+                                      this.p1Score, scoreConfig);
 
     }
     
@@ -142,7 +145,11 @@ class Play extends Phaser.Scene {
         tile.body.setVelocityY(5);
         this.platforms.add(tile);
         if (x != 300 && y != 600){
-            this.coin.create(x,y,'coin');
+            let coin = this.physics.add.sprite(x,y-50,'coin').setScale(1);
+            coin.body.immovable = true;
+            coin.body.allowGravity = false;
+            coin.body.setVelocityY(5);
+            this.coin.add(coin);
         }
     }
 
@@ -155,14 +162,14 @@ class Play extends Phaser.Scene {
         return output;
     }
 
-    randomNumberY(num){
+    /*randomNumberY(num){
         let output = Math.floor(Math.random() * num);
         while (output < 100 || output > 500){
             output = Math.floor(Math.random() * num);
         }
         return output;
         //return Math.floor(Math.random() * num);
-    }
+    }*/
 
     PlayerCollectCoin(player,coin){
         coin.disableBody(true,true);
