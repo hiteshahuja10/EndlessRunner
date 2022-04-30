@@ -4,6 +4,8 @@ class Play extends Phaser.Scene {
         this.platforms;
         this.spikes;
         this.coin;
+        this.lava;
+        this.title;
         this.gameOver = false;
     }
 
@@ -14,7 +16,7 @@ class Play extends Phaser.Scene {
         this.load.image('spike','./assets/Spikes.png');
         this.load.image('spike1','./assets/Spikes1.png');
         this.load.image('lava', './assets/Lava.png');
-        this.load.image('shark', './assets/coin.png');
+        this.load.image('coin', './assets/coin.png');
         this.load.spritesheet('leftrun', './assets/Player_LeftRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
         this.load.spritesheet('rightrun', './assets/Play_RightRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
         this.load.spritesheet('vibing', './assets/Player.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:0} )
@@ -24,12 +26,14 @@ class Play extends Phaser.Scene {
         this.music = this.sound.add('sfx_music');
         this.music.loop = true;
         this.music.play();
+        //this.player = new dude(this,300, 500, 'player');
+        //this.physics.add.collider(this.player, this.title); 
 
         // place tile sprite
         this.tile = this.add.tileSprite(0, 0, 560, 700, 'tile').setOrigin(0, 0);
         this.sfxCoin = this.sound.add('sfx_coinpick');
         // blue UI background
-        this.add.rectangle(0, borderUISize, game.config.width, (scoreUISize * 2)-5, 
+        this.title = this.add.rectangle(0, borderUISize, game.config.width, (scoreUISize * 2)-5, 
             0xc2e0ff).setOrigin(0, 0);
 
         // purple borders
@@ -42,8 +46,6 @@ class Play extends Phaser.Scene {
             0xFFFFFF).setOrigin(0, 0);
         this.player = new dude(this,300, 500, 'player');
         this.player.body.gravity.y = 200;
-        //this.coin = this.add.sprite(0, 0, 100, 400, 'shark');
-        //this.shark = new dude(this,100,300, 'shark');
         let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '50px',
@@ -65,19 +67,18 @@ class Play extends Phaser.Scene {
         this.player.jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.Left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.platforms = this.add.group();
-
-        var plat_1 = this.createPlatform(300,600);
-        var plat_2 = this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
-        //this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
+        this.coin = this.add.group();
+        //this.title = this.add.group();
 
         this.physics.add.collider(this.player, this.platforms); 
+        //this.player.setCollideWorldBounds(true);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         this.spikes = this.physics.add.staticGroup();
         this.coin = this.physics.add.staticGroup();
         this.lava = this.physics.add.staticGroup();
-        this.spikes.create(280,650, 'lava');
-        this.coin.create(100,300,'shark');
-        this.coin.create(400,300,'shark');
+        this.lava.create(280,675, 'lava');
+        //this.coin.create(100,300,'coin');
+        //this.coin.create(400,300,'coin');
         this.anims.create({
             key: 'leftrun',
             frames: this.anims.generateFrameNumbers('leftrun', { start: 0, end: 3, first: 0}),
@@ -97,13 +98,19 @@ class Play extends Phaser.Scene {
         this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
         this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
 
-        this.block = this.physics.add.image(100,100,'platform');
+        this.createPlatform(300,600);
+        this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
+        this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
+        this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
+        this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
+        this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
+
+        /*this.block = this.physics.add.image(100,100,'platform');
         this.block.setImmovable(true);
         this.block.setVelocityY(50);
         this.block.body.setAllowGravity(false);
-        //this.block.body.moves = (true);
         this.physics.add.collider(this.player, this.block);
-        this.block.refreshBody();
+        this.block.refreshBody();*/
 
     }
     
@@ -131,20 +138,29 @@ class Play extends Phaser.Scene {
         let tile = this.physics.add.sprite(x,y,'platform').setScale(2);
         tile.body.immovable = true;
         tile.body.allowGravity = false;
-        tile.body.setVelocityY(20);
+        tile.body.setVelocityY(5);
         this.platforms.add(tile);
+        if (x != 300 && y != 600){
+            this.coin.create(x,y,'coin');
+        }
     }
 
     randomNumberX(num){
         let output = Math.floor(Math.random() * num);
-        while (output < 100){
+        while (output < 100 || output > 500){
             output = Math.floor(Math.random() * num);
         }
+
         return output;
     }
 
     randomNumberY(num){
-        return Math.floor(Math.random() * num);
+        let output = Math.floor(Math.random() * num);
+        while (output < 100 || output > 500){
+            output = Math.floor(Math.random() * num);
+        }
+        return output;
+        //return Math.floor(Math.random() * num);
     }
 
     PlayerCollectCoin(player,coin){
