@@ -17,6 +17,7 @@ class Play extends Phaser.Scene {
         this.load.image('spike1','./assets/Spikes1.png');
         this.load.image('lava', './assets/Lava.png');
         this.load.image('coin', './assets/coin.png');
+        this.load.spritesheet('death_animation', './assets/DeathAnimation.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:13});
         this.load.spritesheet('leftrun', './assets/Player_LeftRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
         this.load.spritesheet('rightrun', './assets/Play_RightRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
         this.load.spritesheet('vibing', './assets/Player.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:0} )
@@ -66,6 +67,11 @@ class Play extends Phaser.Scene {
         this.lava = this.physics.add.staticGroup();
         //this.coin.create(100,300,'coin');
         //this.coin.create(400,300,'coin');
+        this.anims.create({
+            key:'death_animation',
+            frames: this.anims.generateFrameNumbers('death_animation', { start: 0, end: 13, first: 0}),
+            framerate: 30
+        });
         this.anims.create({
             key: 'leftrun',
             frames: this.anims.generateFrameNumbers('leftrun', { start: 0, end: 3, first: 0}),
