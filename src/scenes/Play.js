@@ -70,7 +70,6 @@ class Play extends Phaser.Scene {
         this.coin = this.add.group();
         //this.title = this.add.group();
 
-        this.physics.add.collider(this.player, this.platforms); 
         //this.player.setCollideWorldBounds(true);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         this.spikes = this.physics.add.staticGroup();
@@ -94,6 +93,8 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('vibing', { start: 0, end: 0, first: 0}),
             frameRate: 30
         });
+        this.physics.add.collider(this.player, this.platforms); 
+        this.physics.add.collider(this.platforms, this.lava, this.platformHitLava); 
         this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
         this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
         this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
@@ -179,4 +180,12 @@ class Play extends Phaser.Scene {
         player.jump = 0;
 
     }
+
+    platformHitLava(platform, lava){
+        console.log("platform hit lava");
+        platform.destroy();
+        this.createPlatform(100, 600);
+    }
+
+
 }
