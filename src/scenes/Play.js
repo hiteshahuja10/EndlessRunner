@@ -64,7 +64,6 @@ class Play extends Phaser.Scene {
         this.spikes = this.physics.add.staticGroup();
         //this.coin = this.physics.add.staticGroup();
         this.lava = this.physics.add.staticGroup();
-        this.lava.create(280,675, 'lava');
         //this.coin.create(100,300,'coin');
         //this.coin.create(400,300,'coin');
         this.anims.create({
@@ -99,6 +98,8 @@ class Play extends Phaser.Scene {
         this.block.body.setAllowGravity(false);
         this.physics.add.collider(this.player, this.block);
         this.block.refreshBody();*/
+        this.lava.create(280,675, 'lava');
+
         // blue UI background
         this.title = this.add.rectangle(0, borderUISize, game.config.width, (scoreUISize * 2)-5, 
             0xc2e0ff).setOrigin(0, 0);
@@ -114,7 +115,6 @@ class Play extends Phaser.Scene {
         this.p1Score = 0;
         this.scoreLeft = this.add.text(borderUISize + borderPadding*54, borderUISize + borderPadding, 
                                       this.p1Score, scoreConfig);
-
     }
     
     update(){
@@ -134,6 +134,7 @@ class Play extends Phaser.Scene {
         if(this.player.gameOver != true){
           this.player.update();    
         }
+
     }
     
 
