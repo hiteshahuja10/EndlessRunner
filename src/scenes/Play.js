@@ -18,8 +18,6 @@ class Play extends Phaser.Scene {
         this.load.spritesheet('leftrun', './assets/Player_LeftRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
         this.load.spritesheet('rightrun', './assets/Play_RightRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
         this.load.spritesheet('vibing', './assets/Player.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:0} )
-        //this.load.spritesheet('explosion', './assets/sharkexplosion.png', {frameWidth: 64, frameHeight: 32, 
-            //startFrame: 0, endFrame: 6});
     }
 
     create() {
@@ -48,10 +46,10 @@ class Play extends Phaser.Scene {
         //this.shark = new dude(this,100,300, 'shark');
         let scoreConfig = {
             fontFamily: 'Courier',
-            fontSize: '28px',
+            fontSize: '50px',
             backgroundColor: '#f1a0ff',
             color: '#1823ff',
-            align: 'right',
+            align: 'center',
             padding: {
             //top: 2,
             //bottom: 2,
@@ -59,7 +57,7 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
         this.p1Score = 0;
-        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding, 
+        this.scoreLeft = this.add.text(borderUISize + borderPadding*54, borderUISize + borderPadding, 
             this.p1Score, scoreConfig);
         //this.gameTime = this.add.text(game.config.width/2-20, borderUISize + borderPadding, this.game_time, timeConfig);
         this.player.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -67,7 +65,9 @@ class Play extends Phaser.Scene {
         this.player.jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.Left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
 
-        this.createPlatform(300, 600);
+        var plat_1 = this.createPlatform(300,600);
+        //var plat_2 = this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
+        //this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
 
         this.physics.add.collider(this.player, this.platforms); 
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
@@ -97,34 +97,19 @@ class Play extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
 
         this.block = this.physics.add.image(100,100,'platform');
-        this.block.setImmovable = true
+        this.block.setImmovable(true);
         this.block.setVelocityY(50);
         this.block.body.setAllowGravity(false);
         //this.block.body.moves = (true);
         this.physics.add.collider(this.player, this.block);
-        this.block.setBounce(-1);
         this.block.refreshBody();
 
     }
     
     update(){
-
-        let menuConfig = {
-            fontFamily: 'Courier',
-            fontSize: '24px',
-            backgroundColor: '#f1a0ff',
-            color: '#1823ff',
-            align: 'right',
-            padding: {
-            top: 5,
-            bottom: 5,
-            },
-            fixedWidth: 0
-        } 
         if (this.player.gameOver == true){
             this.music.loop = false;
             this.music.stop();
-            console.log("game over screen")
             this.check = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu',
                 menuConfig).setOrigin(0.5);
             if (Phaser.Input.Keyboard.JustDown(keyR)){
@@ -143,11 +128,23 @@ class Play extends Phaser.Scene {
 
     createPlatform(x,y){
         this.platforms = this.add.group();
-        let tile = this.physics.add.sprite(x,y,'platform').setScale(2).refreshBody();
+        let tile = this.physics.add.sprite(x,y,'platform').setScale(2);
         tile.body.immovable = true;
         tile.body.allowGravity = false;
         tile.body.setVelocityY(5);
         this.platforms.add(tile);
+    }
+
+    randomNumberX(num){
+        let output = Math.floor(Math.random() * num);
+        while (output < 100){
+            output = Math.floor(Math.random() * num);
+        }
+        return output;
+    }
+
+    randomNumberY(num){
+        return Math.floor(Math.random() * num);
     }
 
     PlayerCollectCoin(player,coin){

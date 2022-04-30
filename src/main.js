@@ -14,6 +14,18 @@ var config = {
     scene: [Menu,Play]
 };
 
+var menuConfig = {
+    fontFamily: 'Courier',
+    fontSize: '24px',
+    backgroundColor: '#f1a0ff',
+    color: '#1823ff',
+    align: 'right',
+    padding: {
+    top: 5,
+    bottom: 5,
+    },
+    fixedWidth: 0
+} 
 
 var game = new Phaser.Game(config);
 // reserve keyboard vars

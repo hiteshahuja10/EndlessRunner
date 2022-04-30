@@ -26,8 +26,22 @@ class Menu extends Phaser.Scene {
             },
             fixedWidth: 0
         }
+        let titleConfig = {
+            fontFamily: 'Courier',
+            fontSize: '24px',
+            backgroundColor: '#f1a0ff',
+            color: '#1823ff',
+            align: 'center',
+            padding: {
+            top: 5,
+            bottom: 5,
+            },
+            fixedWidth: 150
+        }
         this.brick = this.add.tileSprite(0, 0, 560, 700, 'brick').setOrigin(0, 0);
         //show menu text
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - 100, 
+            'Tomb Jump!', titleConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 
             'P1: Use A&D to move & Space Bar to jump', menuConfig).setOrigin(0.5);
         
@@ -45,9 +59,9 @@ class Menu extends Phaser.Scene {
     }
 
     update(){
-        this.game.scale.pageAlignHorizontally = true;
-        this.game.scale.pageAlignVertically = true;
-        this.game.scale.refresh();
+        //this.game.scale.pageAlignHorizontally = true;
+        //this.game.scale.pageAlignVertically = true;
+        //this.game.scale.refresh();
         this.brick.tilePositionY -= 4;
         if (Phaser.Input.Keyboard.JustDown(spaceBar)) {
             /*game.settings = {
