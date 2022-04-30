@@ -6,6 +6,7 @@ class Play extends Phaser.Scene {
         this.coin;
         this.lava;
         this.title;
+        this.timer;
         this.gameOver = false;
     }
 
@@ -102,17 +103,15 @@ class Play extends Phaser.Scene {
         this.createPlatform(300,600);
         this.createPlatform(this.randomNumberX(600), 150);
         this.createPlatform(this.randomNumberX(600), 150);
-        //this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
-        //this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
-        //this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
-
-        /*this.block = this.physics.add.image(100,100,'platform');
-        this.block.setImmovable(true);
-        this.block.setVelocityY(50);
-        this.block.body.setAllowGravity(false);
-        this.physics.add.collider(this.player, this.block);
-        this.block.refreshBody();*/
-
+        
+        this.time.addEvent({
+            delay: 5000,
+            callback: () =>{
+                this.createPlatform(this.randomNumberX(600), 150);
+                console.log("test");
+            },
+            loop: true
+        })
     }
     
     update(){
@@ -139,7 +138,7 @@ class Play extends Phaser.Scene {
         let tile = this.physics.add.sprite(x,y,'platform').setScale(2);
         tile.body.immovable = true;
         tile.body.allowGravity = false;
-        tile.body.setVelocityY(5);
+        tile.body.setVelocityY(50);
         this.platforms.add(tile);
         if (x != 300 && y != 600){
             let coin = this.physics.add.sprite(x,y-50,'coin').setScale(1);
