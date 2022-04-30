@@ -90,6 +90,7 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('vibing', { start: 0, end: 0, first: 0}),
             frameRate: 30
         });
+        this.physics.add.collider(this.platforms, this.lava, this.platformHitLava);
         this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
         this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
         this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
