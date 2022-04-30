@@ -191,6 +191,7 @@ class Play extends Phaser.Scene {
 
     platformHitLava(platform, lava){
         console.log("platform hit lava");
+        this.createPlatform(100,300);
         platform.destroy();
     }
 
