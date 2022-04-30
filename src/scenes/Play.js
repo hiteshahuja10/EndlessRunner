@@ -144,7 +144,7 @@ class Play extends Phaser.Scene {
             let coin = this.physics.add.sprite(x,y-50,'coin').setScale(1);
             coin.body.immovable = true;
             coin.body.allowGravity = false;
-            coin.body.setVelocityY(5);
+            coin.body.setVelocityY(50);
             this.coin.add(coin);
         }
     }
