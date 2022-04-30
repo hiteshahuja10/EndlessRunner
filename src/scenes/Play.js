@@ -32,18 +32,7 @@ class Play extends Phaser.Scene {
         // place tile sprite
         this.tile = this.add.tileSprite(0, 0, 560, 700, 'tile').setOrigin(0, 0);
         this.sfxCoin = this.sound.add('sfx_coinpick');
-        // blue UI background
-        this.title = this.add.rectangle(0, borderUISize, game.config.width, (scoreUISize * 2)-5, 
-            0xc2e0ff).setOrigin(0, 0);
 
-        // purple borders
-        //game.config.width
-        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 
-            0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height,
-            0xFFFFFF).setOrigin(0, 0);
         this.player = new dude(this,300, 500, 'player');
         this.player.body.gravity.y = 200;
         //this.title.setCollideWorldBounds(true);
@@ -59,9 +48,7 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
         }
-        this.p1Score = 0;
-        this.scoreLeft = this.add.text(borderUISize + borderPadding*54, borderUISize + borderPadding, 
-            this.p1Score, scoreConfig);
+
         //this.gameTime = this.add.text(game.config.width/2-20, borderUISize + borderPadding, this.game_time, timeConfig);
         this.player.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.player.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -71,13 +58,11 @@ class Play extends Phaser.Scene {
         this.coin = this.add.group();
         //this.title = this.add.group();
 
-        this.physics.add.collider(this.player, this.platforms); 
         //this.player.setCollideWorldBounds(true);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         this.spikes = this.physics.add.staticGroup();
         //this.coin = this.physics.add.staticGroup();
         this.lava = this.physics.add.staticGroup();
-        this.lava.create(280,675, 'lava');
         //this.coin.create(100,300,'coin');
         //this.coin.create(400,300,'coin');
         this.anims.create({
@@ -95,6 +80,8 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('vibing', { start: 0, end: 0, first: 0}),
             frameRate: 30
         });
+        this.physics.add.collider(this.player, this.platforms); 
+        this.physics.add.collider(this.platforms, this.lava, this.platformHitLava); 
         this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
         this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
         this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
@@ -112,7 +99,23 @@ class Play extends Phaser.Scene {
         this.block.body.setAllowGravity(false);
         this.physics.add.collider(this.player, this.block);
         this.block.refreshBody();*/
+        this.lava.create(280,675, 'lava');
 
+        // blue UI background
+        this.title = this.add.rectangle(0, borderUISize, game.config.width, (scoreUISize * 2)-5, 
+            0xc2e0ff).setOrigin(0, 0);
+
+        // purple borders
+        //game.config.width
+        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
+        this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 
+            0xFFFFFF).setOrigin(0, 0);
+        this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
+        this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height,
+            0xFFFFFF).setOrigin(0, 0);
+        this.p1Score = 0;
+        this.scoreLeft = this.add.text(borderUISize + borderPadding*54, borderUISize + borderPadding, 
+                                      this.p1Score, scoreConfig);
     }
     
     update(){
@@ -132,6 +135,7 @@ class Play extends Phaser.Scene {
         if(this.player.gameOver != true){
           this.player.update();    
         }
+
     }
     
 
@@ -184,4 +188,11 @@ class Play extends Phaser.Scene {
         player.jump = 0;
 
     }
+
+    platformHitLava(platform, lava){
+        console.log("platform hit lava");
+        platform.destroy();
+    }
+
+
 }
