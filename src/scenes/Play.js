@@ -183,4 +183,12 @@ class Play extends Phaser.Scene {
         player.jump = 0;
 
     }
+
+    platformHitLava(platform, lava){
+        console.log("platform hit lava");
+        //this.createPlatform(100,300);
+        platform.destroy();
+    }
+
+
 }
