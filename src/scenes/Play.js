@@ -64,9 +64,10 @@ class Play extends Phaser.Scene {
         this.player.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.player.jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.Left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        this.platforms = this.add.group();
 
         var plat_1 = this.createPlatform(300,600);
-        //var plat_2 = this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
+        var plat_2 = this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
         //this.createPlatform(this.randomNumberX(600), this.randomNumberY(600));
 
         this.physics.add.collider(this.player, this.platforms); 
@@ -127,11 +128,10 @@ class Play extends Phaser.Scene {
     
 
     createPlatform(x,y){
-        this.platforms = this.add.group();
         let tile = this.physics.add.sprite(x,y,'platform').setScale(2);
         tile.body.immovable = true;
         tile.body.allowGravity = false;
-        tile.body.setVelocityY(5);
+        tile.body.setVelocityY(20);
         this.platforms.add(tile);
     }
 
