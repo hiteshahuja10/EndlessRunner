@@ -35,17 +35,7 @@ class Play extends Phaser.Scene {
         this.tile = this.add.tileSprite(0, 0, 560, 700, 'tile').setOrigin(0, 0);
         this.sfxCoin = this.sound.add('sfx_coinpick');
         // blue UI background
-        this.title = this.add.rectangle(0, borderUISize, game.config.width, (scoreUISize * 2)-5, 
-            0xc2e0ff).setOrigin(0, 0);
 
-        // purple borders
-        //game.config.width
-        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 
-            0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height,
-            0xFFFFFF).setOrigin(0, 0);
         this.player = new dude(this,300, 500, 'player');
         this.player.body.gravity.y = 200;
         //this.title.setCollideWorldBounds(true);
@@ -62,8 +52,7 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
         this.p1Score = 0;
-        this.scoreLeft = this.add.text(borderUISize + borderPadding*54, borderUISize + borderPadding, 
-            this.p1Score, scoreConfig);
+
         //this.gameTime = this.add.text(game.config.width/2-20, borderUISize + borderPadding, this.game_time, timeConfig);
         this.player.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.player.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -79,7 +68,6 @@ class Play extends Phaser.Scene {
         this.spikes = this.physics.add.staticGroup();
         //this.coin = this.physics.add.staticGroup();
         this.lava = this.physics.add.staticGroup();
-        this.lava.create(280,675, 'lava');
         //this.coin.create(100,300,'coin');
         //this.coin.create(400,300,'coin');
         this.anims.create({
@@ -118,6 +106,20 @@ class Play extends Phaser.Scene {
             },
             loop: true
         })
+        this.lava.create(280,675, 'lava');
+
+        this.title = this.add.rectangle(0, borderUISize, game.config.width, (scoreUISize * 2)-5, 
+            0xc2e0ff).setOrigin(0, 0);
+        this.scoreLeft = this.add.text(borderUISize + borderPadding*54, borderUISize + borderPadding, 
+                this.p1Score, scoreConfig);
+        // purple borders
+        //game.config.width
+        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
+        this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 
+            0xFFFFFF).setOrigin(0, 0);
+        this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
+        this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height,
+            0xFFFFFF).setOrigin(0, 0);
     }
     
     update(){
