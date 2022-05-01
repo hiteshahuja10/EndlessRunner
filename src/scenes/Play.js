@@ -36,7 +36,7 @@ class Play extends Phaser.Scene {
         this.sfxCoin = this.sound.add('sfx_coinpick');
         // blue UI background
 
-        this.player = new dude(this,300, 500, 'player');
+        this.player = new dude(this,300, 425, 'player');
         this.player.body.gravity.y = 200;
         //this.title.setCollideWorldBounds(true);
         let scoreConfig = {
@@ -94,8 +94,9 @@ class Play extends Phaser.Scene {
         this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
         this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
         this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
+        
 
-        this.createPlatform(300,600);
+        this.createPlatform(300,500);
         this.createPlatform(this.randomNumberX(600), 150);
         this.createPlatform(this.randomNumberX(600), 150);
         
@@ -103,7 +104,7 @@ class Play extends Phaser.Scene {
             delay: 5000,
             callback: () =>{
                 this.createPlatform(this.randomNumberX(600), 150);
-                console.log("test");
+                //console.log("test");
             },
             loop: true
         })
@@ -113,8 +114,6 @@ class Play extends Phaser.Scene {
             0xc2e0ff).setOrigin(0, 0);
         this.scoreLeft = this.add.text(borderUISize + borderPadding*54, borderUISize + borderPadding, 
                 this.p1Score, scoreConfig);
-        // purple borders
-        //game.config.width
         this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 
             0xFFFFFF).setOrigin(0, 0);
@@ -194,8 +193,9 @@ class Play extends Phaser.Scene {
     }
 
     platformHitLava(platform, lava){
-        console.log("platform hit lava");
+        //console.log("platform hit lava");
         //this.createPlatform(100,300);
+        //checking
         platform.destroy();
     }
 
