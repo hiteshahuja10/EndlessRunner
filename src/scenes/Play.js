@@ -95,7 +95,7 @@ class Play extends Phaser.Scene {
         this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
         this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
 
-        this.createPlatform(300,600);
+        this.createPlatform(300, 575);
         this.createPlatform(this.randomNumberX(600), 150);
         this.createPlatform(this.randomNumberX(600), 150);
         
@@ -113,8 +113,6 @@ class Play extends Phaser.Scene {
             0xc2e0ff).setOrigin(0, 0);
         this.scoreLeft = this.add.text(borderUISize + borderPadding*54, borderUISize + borderPadding, 
                 this.p1Score, scoreConfig);
-        // purple borders
-        //game.config.width
         this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 
             0xFFFFFF).setOrigin(0, 0);
