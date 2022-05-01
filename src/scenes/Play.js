@@ -36,7 +36,7 @@ class Play extends Phaser.Scene {
         this.sfxCoin = this.sound.add('sfx_coinpick');
         // blue UI background
 
-        this.player = new dude(this,300, 500, 'player');
+        this.player = new dude(this,300, 425, 'player');
         this.player.body.gravity.y = 200;
         //this.title.setCollideWorldBounds(true);
         let scoreConfig = {
@@ -94,8 +94,9 @@ class Play extends Phaser.Scene {
         this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
         this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
         this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
+        
 
-        this.createPlatform(300, 575);
+        this.createPlatform(300,500);
         this.createPlatform(this.randomNumberX(600), 150);
         this.createPlatform(this.randomNumberX(600), 150);
         
