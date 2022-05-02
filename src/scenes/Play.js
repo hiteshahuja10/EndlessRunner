@@ -188,7 +188,7 @@ class Play extends Phaser.Scene {
         }
     }
     
-
+    
     randomNumberX(num){
         let output = Math.floor(Math.random() * num);
         while (output < 100 || output > 500){
