@@ -28,15 +28,15 @@ class Menu extends Phaser.Scene {
         }
         let titleConfig = {
             fontFamily: 'Courier',
-            fontSize: '24px',
-            backgroundColor: '#f1a0ff',
+            fontSize: '30px',
+            backgroundColor: '#c7c7c7',
             color: '#1823ff',
             align: 'center',
             padding: {
             top: 5,
             bottom: 5,
             },
-            fixedWidth: 150
+            fixedWidth: 200
         }
         this.brick = this.add.tileSprite(0, 0, 560, 700, 'brick').setOrigin(0, 0);
         //show menu text
@@ -48,8 +48,8 @@ class Menu extends Phaser.Scene {
             'Use S to decline (come down faster)', menuConfig).setOrigin(0.5);
         
         //menuConfig.backgroundColor = '#00FF00';
-        menuConfig.backgroundColor = '#c2e0ff';
-        menuConfig.color = '#000';
+        //menuConfig.backgroundColor = 'c7c7c7';
+        //menuConfig.color = '#000';
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding + 100,
             'Press Space Bar to start the game!', menuConfig).setOrigin(0.5);
 
