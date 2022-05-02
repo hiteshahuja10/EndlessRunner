@@ -170,7 +170,10 @@ class Play extends Phaser.Scene {
     
 
     createPlatform(x,y, velocity){
-        if(x > 50){
+        if(!x){
+            x = 100;
+        }
+        console.log("rhis is x:",x);
             let test = this.random(1, 2);
             //let size = this.random(1, 2);
             console.log(test);
@@ -193,7 +196,6 @@ class Play extends Phaser.Scene {
                     this.spikes.add(spikes);
                 }
             }
-        }
         
     }
     
