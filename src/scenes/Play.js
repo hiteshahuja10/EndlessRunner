@@ -7,6 +7,8 @@ class Play extends Phaser.Scene {
         this.lava;
         this.title;
         this.timer;
+        this.line;
+        this.lavaLine;
         this.gameOver = false;
     }
 
@@ -19,6 +21,7 @@ class Play extends Phaser.Scene {
         this.load.image('downspike','./assets/Spike_Down.png');
         this.load.image('lava', './assets/Lava.png');
         this.load.image('coin', './assets/coin.png');
+        this.load.image('line', './assets/line.png');
         this.load.spritesheet('death_animation', './assets/DeathAnimation.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:13});
         this.load.spritesheet('leftrun', './assets/Player_LeftRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
         this.load.spritesheet('rightrun', './assets/Play_RightRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
@@ -39,9 +42,14 @@ class Play extends Phaser.Scene {
         // blue UI background
         this.title = this.add.rectangle(0, borderUISize, game.config.width, (scoreUISize * 2)-5, 
             0xc2e0ff).setOrigin(0, 0);
-        this.title = this.add.group();
+        
 
-        this.player = new dude(this,300, 425, 'player');
+        this.line = this.physics.add.staticGroup();
+        this.line.create(290,75,'line');
+
+        
+
+        this.player = new dude(this,300, 250, 'player');
         this.player.body.gravity.y = 500;
         //this.title.body.setCollideWorldBounds(true);
         let scoreConfig = {
@@ -62,12 +70,14 @@ class Play extends Phaser.Scene {
         this.player.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.player.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.player.jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.player.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.Left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.platforms = this.add.group();
         this.coin = this.add.group();
         this.spikes = this.add.group();
 
         this.physics.add.collider(this.player, this.platforms); 
+        this.physics.add.collider(this.player,this.line);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         this.lava = this.physics.add.staticGroup();
         this.anims.create({
@@ -91,25 +101,30 @@ class Play extends Phaser.Scene {
             frameRate: 30
         });
         this.physics.add.collider(this.platforms, this.lava, this.platformHitLava);
+        this.physics.add.collider(this.spikes, this.lava, this.platformHitLava);
         this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
         this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
         //this.physics.add.collider(this.player, this.title, this.PlayerHitSpikes); 
         this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
         
 
-        this.createPlatform(300,500,50);
-        this.createPlatform(this.randomNumberX(600), 300, 50);
+        this.createPlatform(300,300,50);
+        this.createPlatform(this.randomNumberX(600), 150, 50);
         
         this.time.addEvent({
+<<<<<<< HEAD
             delay: 1500,
+=======
+            delay: 1000 ,
+>>>>>>> fbd51480d13e96cf2237535b792f6a5b77ba38f8
             callback: () =>{
                 if (this.p1Score >= this.level){
-                    this.vel *= 2;
+                    this.vel *= 1.25;
                     this.level *= 2;
-                    this.createPlatform(this.randomNumberX(600), 100, this.vel);
+                    this.createPlatform(this.randomNumberX(700), 50, this.vel);
                 }
                 else{
-                    this.createPlatform(this.randomNumberX(600), 100, this.vel);
+                    this.createPlatform(this.randomNumberX(700), 50, this.vel);
                 }
             },
             loop: true
@@ -124,6 +139,9 @@ class Play extends Phaser.Scene {
         this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height,
             0xFFFFFF).setOrigin(0, 0);
+        
+        this.lavaLine = this.physics.add.staticGroup();
+        this.lavaLine.create(290,700,'line');
     }
     
     update(){
@@ -146,14 +164,19 @@ class Play extends Phaser.Scene {
     }
     
     createPlatform(x,y, velocity){
+<<<<<<< HEAD
         let test = this.random(1, 2);
         //let size = this.random(1, 2);
         console.log(test);
         let tile = this.physics.add.sprite(x,y,'platform').setScale(2);
+=======
+        let tile = this.physics.add.sprite(x,y,'platform').setScale(1.2);
+>>>>>>> fbd51480d13e96cf2237535b792f6a5b77ba38f8
         tile.body.immovable = true;
         tile.body.allowGravity = false;
         tile.body.setVelocityY(velocity);
         this.platforms.add(tile);
+<<<<<<< HEAD
         let coin = this.physics.add.sprite(x,y-50,'coin').setScale(1);
         coin.body.immovable = true;
         coin.body.allowGravity = false;
@@ -167,6 +190,19 @@ class Play extends Phaser.Scene {
                 spikes.body.setVelocityY(velocity);
                 this.spikes.add(spikes);
             }
+=======
+        if (x != 300 && y != 600){
+            let coin = this.physics.add.sprite(x,y-30,'coin').setScale(0.5);
+            coin.body.immovable = true;
+            coin.body.allowGravity = false;
+            coin.body.setVelocityY(velocity);
+            this.coin.add(coin);
+            let spikes = this.physics.add.sprite(x,y+27,'downspike').setScale(1);
+            spikes.body.immovable = true;
+            spikes.body.allowGravity = false;
+            spikes.body.setVelocityY(velocity);
+            this.spikes.add(spikes);
+>>>>>>> fbd51480d13e96cf2237535b792f6a5b77ba38f8
         }
     }
 
