@@ -106,10 +106,10 @@ class Play extends Phaser.Scene {
                 if (this.p1Score >= this.level){
                     this.vel *= 2;
                     this.level *= 2;
-                    this.createPlatform(this.randomNumberX(600), 150, this.vel);
+                    this.createPlatform(this.randomNumberX(600), 100, this.vel);
                 }
                 else{
-                    this.createPlatform(this.randomNumberX(600), 150, this.vel);
+                    this.createPlatform(this.randomNumberX(600), 100, this.vel);
                 }
             },
             loop: true
@@ -158,7 +158,7 @@ class Play extends Phaser.Scene {
             coin.body.allowGravity = false;
             coin.body.setVelocityY(velocity);
             this.coin.add(coin);
-            let spikes = this.physics.add.sprite(x,y+50,'downspike').setScale(1.75);
+            let spikes = this.physics.add.sprite(x,y+44,'downspike').setScale(1.75);
             spikes.body.immovable = true;
             spikes.body.allowGravity = false;
             spikes.body.setVelocityY(velocity);
