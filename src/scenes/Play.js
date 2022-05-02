@@ -101,6 +101,8 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('vibing', { start: 0, end: 0, first: 0}),
             frameRate: 30
         });
+        this.physics.add.collider(this.coin, this.lava, this.platformHitLava);
+
         this.physics.add.collider(this.platforms, this.lava, this.platformHitLava);
         this.physics.add.collider(this.spikes, this.lava, this.platformHitLava);
         this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
@@ -177,7 +179,7 @@ class Play extends Phaser.Scene {
         this.coin.add(coin);
         if(test % 2 == 0) {
             if (x != 300 && y != 600){
-                let spikes = this.physics.add.sprite(x,y+27,'downspike').setScale(1);
+                let spikes = this.physics.add.sprite(x,y+26,'downspike').setScale(1);
                 spikes.body.immovable = true;
                 spikes.body.allowGravity = false;
                 spikes.body.setVelocityY(velocity);
