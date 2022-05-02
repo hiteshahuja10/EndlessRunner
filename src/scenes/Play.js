@@ -19,7 +19,7 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image('tile', './assets/Tile.png');
         this.load.image('platform', './assets/StonePlatform.png');
-        this.load.image('player', './assets/player.png');
+        this.load.image('player', './assets/Player.png');
         this.load.image('spike','./assets/Spikes.png');
         this.load.image('spike1','./assets/Spikes1.png');
         this.load.image('downspike','./assets/Spike_Down.png');
