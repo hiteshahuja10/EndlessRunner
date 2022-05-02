@@ -7,6 +7,8 @@ class Play extends Phaser.Scene {
         this.lava;
         this.title;
         this.timer;
+        this.line;
+        this.lavaLine;
         this.gameOver = false;
     }
 
@@ -19,6 +21,7 @@ class Play extends Phaser.Scene {
         this.load.image('downspike','./assets/Spike_Down.png');
         this.load.image('lava', './assets/Lava.png');
         this.load.image('coin', './assets/coin.png');
+        this.load.image('line', './assets/line.png');
         this.load.spritesheet('death_animation', './assets/DeathAnimation.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:13});
         this.load.spritesheet('leftrun', './assets/Player_LeftRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
         this.load.spritesheet('rightrun', './assets/Play_RightRun.png',{frameWidth:53, frameHeight:75, startFrame:0, endFrame:4});
@@ -39,7 +42,12 @@ class Play extends Phaser.Scene {
         // blue UI background
         this.title = this.add.rectangle(0, borderUISize, game.config.width, (scoreUISize * 2)-5, 
             0xc2e0ff).setOrigin(0, 0);
-        this.title = this.add.group();
+        
+
+        this.line = this.physics.add.staticGroup();
+        this.line.create(290,75,'line');
+
+        
 
         this.player = new dude(this,300, 425, 'player');
         this.player.body.gravity.y = 500;
@@ -68,6 +76,7 @@ class Play extends Phaser.Scene {
         this.spikes = this.add.group();
 
         this.physics.add.collider(this.player, this.platforms); 
+        this.physics.add.collider(this.player,this.line);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         this.lava = this.physics.add.staticGroup();
         this.anims.create({
@@ -124,6 +133,9 @@ class Play extends Phaser.Scene {
         this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height,
             0xFFFFFF).setOrigin(0, 0);
+        
+        this.lavaLine = this.physics.add.staticGroup();
+        this.lavaLine.create(290,700,'line');
     }
     
     update(){
