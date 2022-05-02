@@ -91,6 +91,7 @@ class Play extends Phaser.Scene {
             frameRate: 30
         });
         this.physics.add.collider(this.platforms, this.lava, this.platformHitLava);
+        this.physics.add.collider(this.spikes, this.lava, this.platformHitLava);
         this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
         this.physics.add.collider(this.player, this.lava, this.PlayerHitSpikes);
         //this.physics.add.collider(this.player, this.title, this.PlayerHitSpikes); 
