@@ -32,7 +32,7 @@ class Play extends Phaser.Scene {
         this.level = 2;
         this.vel = 50;
         this.num = 0;
-
+        this.test = 0;
         // place tile sprite
         this.tile = this.add.tileSprite(0, 0, 560, 700, 'tile').setOrigin(0, 0);
         this.sfxCoin = this.sound.add('sfx_coinpick');
@@ -101,7 +101,7 @@ class Play extends Phaser.Scene {
         this.createPlatform(this.randomNumberX(600), 300, 50);
         
         this.time.addEvent({
-            delay: 2000,
+            delay: 1500,
             callback: () =>{
                 if (this.p1Score >= this.level){
                     this.vel *= 2;
@@ -145,24 +145,28 @@ class Play extends Phaser.Scene {
         }
     }
     
-
     createPlatform(x,y, velocity){
+        let test = this.random(1, 2);
+        //let size = this.random(1, 2);
+        console.log(test);
         let tile = this.physics.add.sprite(x,y,'platform').setScale(2);
         tile.body.immovable = true;
         tile.body.allowGravity = false;
         tile.body.setVelocityY(velocity);
         this.platforms.add(tile);
-        if (x != 300 && y != 600){
-            let coin = this.physics.add.sprite(x,y-50,'coin').setScale(1);
-            coin.body.immovable = true;
-            coin.body.allowGravity = false;
-            coin.body.setVelocityY(velocity);
-            this.coin.add(coin);
-            let spikes = this.physics.add.sprite(x,y+44,'downspike').setScale(1.75);
-            spikes.body.immovable = true;
-            spikes.body.allowGravity = false;
-            spikes.body.setVelocityY(velocity);
-            this.spikes.add(spikes);
+        let coin = this.physics.add.sprite(x,y-50,'coin').setScale(1);
+        coin.body.immovable = true;
+        coin.body.allowGravity = false;
+        coin.body.setVelocityY(velocity);
+        this.coin.add(coin);
+        if(test % 2 == 0) {
+            if (x != 300 && y != 600){
+                let spikes = this.physics.add.sprite(x,y+44,'downspike').setScale(1.75);
+                spikes.body.immovable = true;
+                spikes.body.allowGravity = false;
+                spikes.body.setVelocityY(velocity);
+                this.spikes.add(spikes);
+            }
         }
     }
 
@@ -207,6 +211,9 @@ class Play extends Phaser.Scene {
         //checking
         platform.destroy();
     }
-
-
+    random(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 }
