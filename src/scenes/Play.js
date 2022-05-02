@@ -41,7 +41,7 @@ class Play extends Phaser.Scene {
         this.sfxCoin = this.sound.add('sfx_coinpick');
         // blue UI background
         this.title = this.add.rectangle(0, borderUISize, game.config.width, (scoreUISize * 2)-5, 
-            0xc2e0ff).setOrigin(0, 0);
+            0x808080).setOrigin(0, 0);
         
 
         this.line = this.physics.add.staticGroup();
@@ -55,8 +55,8 @@ class Play extends Phaser.Scene {
         let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '50px',
-            backgroundColor: '#f1a0ff',
-            color: '#1823ff',
+            backgroundColor: '#000000',
+            color: '#FFFFFF',
             align: 'center',
             padding: {
             //top: 2,
