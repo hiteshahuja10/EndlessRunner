@@ -17,8 +17,8 @@ class Menu extends Phaser.Scene {
         let menuConfig = {
             fontFamily: 'Courier',
             fontSize: '24px',
-            backgroundColor: '#f1a0ff',
-            color: '#1823ff',
+            backgroundColor: '#000000',
+            color: '#FFFFFF',
             align: 'right',
             padding: {
             top: 5,
@@ -44,11 +44,13 @@ class Menu extends Phaser.Scene {
             'Tomb Jump!', titleConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 
             'P1: Use A&D to move & Space Bar to jump', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 
+            'Use S to decline (come down faster)', menuConfig).setOrigin(0.5);
         
         //menuConfig.backgroundColor = '#00FF00';
         menuConfig.backgroundColor = '#c2e0ff';
         menuConfig.color = '#000';
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding,
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding + 100,
             'Press Space Bar to start the game!', menuConfig).setOrigin(0.5);
 
         // define keys
