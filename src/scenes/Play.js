@@ -179,7 +179,7 @@ class Play extends Phaser.Scene {
         this.coin.add(coin);
         if(test % 2 == 0) {
             if (x != 300 && y != 600){
-                let spikes = this.physics.add.sprite(x,y+27,'downspike').setScale(1);
+                let spikes = this.physics.add.sprite(x,y+26,'downspike').setScale(1);
                 spikes.body.immovable = true;
                 spikes.body.allowGravity = false;
                 spikes.body.setVelocityY(velocity);
