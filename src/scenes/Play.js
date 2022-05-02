@@ -41,7 +41,7 @@ class Play extends Phaser.Scene {
             0xc2e0ff).setOrigin(0, 0);
         this.title = this.add.group();
 
-        this.player = new dude(this,300, 425, 'player');
+        this.player = new dude(this,300, 250, 'player');
         this.player.body.gravity.y = 500;
         //this.title.body.setCollideWorldBounds(true);
         let scoreConfig = {
@@ -62,6 +62,7 @@ class Play extends Phaser.Scene {
         this.player.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.player.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.player.jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.player.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.Left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.platforms = this.add.group();
         this.coin = this.add.group();
@@ -98,19 +99,19 @@ class Play extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.coin, this.PlayerCollectCoin, null, this);
         
 
-        this.createPlatform(300,500,50);
-        this.createPlatform(this.randomNumberX(600), 300, 50);
+        this.createPlatform(300,300,50);
+        this.createPlatform(this.randomNumberX(600), 150, 50);
         
         this.time.addEvent({
-            delay: 2000,
+            delay: 1000 ,
             callback: () =>{
                 if (this.p1Score >= this.level){
-                    this.vel *= 2;
+                    this.vel *= 1.25;
                     this.level *= 2;
-                    this.createPlatform(this.randomNumberX(600), 100, this.vel);
+                    this.createPlatform(this.randomNumberX(700), 50, this.vel);
                 }
                 else{
-                    this.createPlatform(this.randomNumberX(600), 100, this.vel);
+                    this.createPlatform(this.randomNumberX(700), 50, this.vel);
                 }
             },
             loop: true
@@ -148,18 +149,18 @@ class Play extends Phaser.Scene {
     
 
     createPlatform(x,y, velocity){
-        let tile = this.physics.add.sprite(x,y,'platform').setScale(2);
+        let tile = this.physics.add.sprite(x,y,'platform').setScale(1.2);
         tile.body.immovable = true;
         tile.body.allowGravity = false;
         tile.body.setVelocityY(velocity);
         this.platforms.add(tile);
         if (x != 300 && y != 600){
-            let coin = this.physics.add.sprite(x,y-50,'coin').setScale(1);
+            let coin = this.physics.add.sprite(x,y-30,'coin').setScale(0.5);
             coin.body.immovable = true;
             coin.body.allowGravity = false;
             coin.body.setVelocityY(velocity);
             this.coin.add(coin);
-            let spikes = this.physics.add.sprite(x,y+44,'downspike').setScale(1.75);
+            let spikes = this.physics.add.sprite(x,y+27,'downspike').setScale(1);
             spikes.body.immovable = true;
             spikes.body.allowGravity = false;
             spikes.body.setVelocityY(velocity);
