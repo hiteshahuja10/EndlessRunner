@@ -40,8 +40,7 @@ class Play extends Phaser.Scene {
         this.vel = 50;
         this.num = 0;
         this.oldX = 100;
-        this.center = game.config.width/2
-        console.log('this is center ',this.center);
+        this.center = game.config.width/2;
 
         // place tile sprite
         this.tile = this.add.tileSprite(0, 0, 560, 700, 'tile').setOrigin(0, 0);
@@ -173,10 +172,8 @@ class Play extends Phaser.Scene {
         if(!x){
             x = 100;
         }
-        console.log("rhis is x:",x);
             let test = this.random(1, 2);
             //let size = this.random(1, 2);
-            console.log(test);
             let tile = this.physics.add.sprite(x,y,'platform').setScale(1.2);
             tile.body.immovable = true;
             tile.body.allowGravity = false;
@@ -211,7 +208,6 @@ class Play extends Phaser.Scene {
             //console.log("this working?")
         }else{
             this.oldX = output;
-            console.log("this is output ",output);
             return output;
         }
     }
@@ -233,7 +229,6 @@ class Play extends Phaser.Scene {
     }
 
     PlayerHitSpikes(player, spikes){
-        console.log("touching spikes");
         player.gameOver = true;
         player.death();
         player.left = 0;
