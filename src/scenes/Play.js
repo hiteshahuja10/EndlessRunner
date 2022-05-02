@@ -1,3 +1,4 @@
+
 class Play extends Phaser.Scene {
     constructor(){
         super("playScene");
@@ -35,7 +36,7 @@ class Play extends Phaser.Scene {
         this.level = 2;
         this.vel = 50;
         this.num = 0;
-        this.test = 0;
+
         // place tile sprite
         this.tile = this.add.tileSprite(0, 0, 560, 700, 'tile').setOrigin(0, 0);
         this.sfxCoin = this.sound.add('sfx_coinpick');
@@ -100,7 +101,6 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('vibing', { start: 0, end: 0, first: 0}),
             frameRate: 30
         });
-        this.physics.add.collider(this.coin, this.lava, this.platformHitLava);
         this.physics.add.collider(this.platforms, this.lava, this.platformHitLava);
         this.physics.add.collider(this.spikes, this.lava, this.platformHitLava);
         this.physics.add.collider(this.player, this.spikes, this.PlayerHitSpikes);
@@ -113,11 +113,7 @@ class Play extends Phaser.Scene {
         this.createPlatform(this.randomNumberX(600), 150, 50);
         
         this.time.addEvent({
-<<<<<<< HEAD
-            delay: 1500,
-=======
             delay: 1000 ,
->>>>>>> fbd51480d13e96cf2237535b792f6a5b77ba38f8
             callback: () =>{
                 if (this.p1Score >= this.level){
                     this.vel *= 1.25;
@@ -164,48 +160,32 @@ class Play extends Phaser.Scene {
         }
     }
     
+
     createPlatform(x,y, velocity){
-<<<<<<< HEAD
         let test = this.random(1, 2);
         //let size = this.random(1, 2);
         console.log(test);
-        let tile = this.physics.add.sprite(x,y,'platform').setScale(2);
-=======
         let tile = this.physics.add.sprite(x,y,'platform').setScale(1.2);
->>>>>>> fbd51480d13e96cf2237535b792f6a5b77ba38f8
         tile.body.immovable = true;
         tile.body.allowGravity = false;
         tile.body.setVelocityY(velocity);
         this.platforms.add(tile);
-<<<<<<< HEAD
-        let coin = this.physics.add.sprite(x,y-50,'coin').setScale(1);
+        let coin = this.physics.add.sprite(x,y-30,'coin').setScale(0.5);
         coin.body.immovable = true;
         coin.body.allowGravity = false;
         coin.body.setVelocityY(velocity);
         this.coin.add(coin);
         if(test % 2 == 0) {
             if (x != 300 && y != 600){
-                let spikes = this.physics.add.sprite(x,y+44,'downspike').setScale(1.75);
+                let spikes = this.physics.add.sprite(x,y+27,'downspike').setScale(1);
                 spikes.body.immovable = true;
                 spikes.body.allowGravity = false;
                 spikes.body.setVelocityY(velocity);
                 this.spikes.add(spikes);
             }
-=======
-        if (x != 300 && y != 600){
-            let coin = this.physics.add.sprite(x,y-30,'coin').setScale(0.5);
-            coin.body.immovable = true;
-            coin.body.allowGravity = false;
-            coin.body.setVelocityY(velocity);
-            this.coin.add(coin);
-            let spikes = this.physics.add.sprite(x,y+27,'downspike').setScale(1);
-            spikes.body.immovable = true;
-            spikes.body.allowGravity = false;
-            spikes.body.setVelocityY(velocity);
-            this.spikes.add(spikes);
->>>>>>> fbd51480d13e96cf2237535b792f6a5b77ba38f8
         }
     }
+    
 
     randomNumberX(num){
         let output = Math.floor(Math.random() * num);
@@ -253,4 +233,6 @@ class Play extends Phaser.Scene {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+
 }
+
